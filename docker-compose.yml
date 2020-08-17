@@ -4,10 +4,11 @@ services:
   testexpo:
     environment:
       - REACT_NATIVE_PACKAGER_HOSTNAME=10.0.0.2
+      - IMBA_DOCKER_TOKEN=$IMBA_DOCKER_TOKEN
     image: sonyarouje/expo-buster:latest
     extra_hosts:
       - "devserver:10.0.0.2"
-    command: "--gitRepo github.com/morgandonze/Imba --pat 7718d82d8ccc7433892fc908fcd59feb6d33ab4e"
+    command: "--gitRepo github.com/morgandonze/Imba --pat ${IMBA_DOCKER_TOKEN}"
     # command: sh -c "yarn install && yarn run dev"
     expose:
       - "19000"
