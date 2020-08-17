@@ -1,0 +1,14 @@
+type Endeavor @model {
+  id: ID!
+  title: String!
+  description: String!
+  momentum: Float!
+  activities: [Activity] @connection(keyName: "byEndeavor", fields: ["id"])
+}
+
+type Activity @model @key(name: "byEndeavor", fields: ["endeavorID"]) {
+  id: ID!
+  title: String!
+  endeavorID: ID!
+  endeavor: Endeavor @connection(fields: ["endeavorID"])
+}
