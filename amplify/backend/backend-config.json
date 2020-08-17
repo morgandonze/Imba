@@ -1,1 +1,10 @@
-{}
+{
+	"auth": {
+		"imba0671e824": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}

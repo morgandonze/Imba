@@ -10,6 +10,11 @@
             "StackName": "amplify-imba-dev-125931",
             "StackId": "arn:aws:cloudformation:us-east-1:499542612127:stack/amplify-imba-dev-125931/06654130-e0ab-11ea-ad00-0ec9495d5707",
             "AmplifyAppId": "d36cgv2nn7spqw"
+        },
+        "categories": {
+            "auth": {
+                "imba0671e824": {}
+            }
         }
     }
 }
