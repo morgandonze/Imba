@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-imba-dev-125931-authRole",
+            "UnauthRoleArn": "arn:aws:iam::499542612127:role/amplify-imba-dev-125931-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::499542612127:role/amplify-imba-dev-125931-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-imba-dev-125931-deployment",
+            "UnauthRoleName": "amplify-imba-dev-125931-unauthRole",
+            "StackName": "amplify-imba-dev-125931",
+            "StackId": "arn:aws:cloudformation:us-east-1:499542612127:stack/amplify-imba-dev-125931/06654130-e0ab-11ea-ad00-0ec9495d5707",
+            "AmplifyAppId": "d36cgv2nn7spqw"
+        }
+    }
+}
