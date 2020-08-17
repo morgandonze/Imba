@@ -1,13 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { withAuthenticator } from "aws-amplify-react-native";
 
-export default function App() {
+import Amplify from "aws-amplify";
+import config from "./aws-exports";
+Amplify.configure(config);
+
+function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.h1}>Imba !!!</Text>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -21,5 +26,7 @@ const styles = StyleSheet.create({
   h1: {
     color: "#ccc",
     fontSize: 40,
-  }
+  },
 });
+
+export default withAuthenticator(App);
