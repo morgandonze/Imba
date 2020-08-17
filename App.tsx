@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Imba !!!</Text>
+      <Text style={styles.h1}>Imba !!!</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -14,8 +14,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#333",
+    alignItems: "flex-start",
+    // justifyContent: "center",
   },
+  h1: {
+    color: "#ccc",
+    fontSize: 40,
+  }
 });
