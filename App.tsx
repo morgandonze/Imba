@@ -39,6 +39,7 @@ function reducer(state: any, action: any) {
     case "set":
       return {
         ...state,
+        endeavors: action.endeavors,
       };
     case "add":
       return {
@@ -93,9 +94,7 @@ function App() {
     ).subscribe({
       next: (eventData) => {
         const endeavor = eventData.value.data.onCreateEndeavor;
-        // if(endeavor.id === anyExistingEventId) return
         dispatch({ type: "add", endeavor });
-        // setEndeavors([...endeavors, endeavor]);
       },
     });
     return () => subscriber.unsubscribe();
@@ -104,7 +103,6 @@ function App() {
   useEffect(() => {
     getEndeavors(dispatch);
   }, []);
-  console.log("state: ", state);
 
   return (
     <SafeAreaView style={styles.safeArea}>
