@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 40,
     paddingVertical: 20,
+    marginTop: 40,
   },
   h1: {
     color: "#333",
