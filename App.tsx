@@ -77,6 +77,7 @@ function App() {
         <View>
           <Input
             placeholder="title"
+            label="Title"
             style={{ ...styles.input }}
             onChange={(e: any) => {
               EndeavorUpdater(e.target.value, "title", dispatch);
