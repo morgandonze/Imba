@@ -3,14 +3,14 @@ import React, { useEffect, useReducer } from "react";
 import { Text, View, SafeAreaView, TouchableOpacity } from "react-native";
 import { withAuthenticator } from "aws-amplify-react-native";
 import { API, graphqlOperation } from "aws-amplify";
-import { createEndeavor } from "./src/graphql/mutations";
+import CreateEndeavor from "./src/_graphql/create-endeavor";
 import { onCreateEndeavor } from "./src/graphql/subscriptions";
 import styles from "./src/styles";
 import EndeavorReducer from "./src/_graphql/endeavor-reducer";
 import getEndeavors from "./src/_graphql/get-endeavors";
 import Endeavor from "./src/components/endeavor";
-import uuid from "uuid/v4";
 import configureAWS from "./src/configure-aws";
+import uuid from "uuid-v4";
 
 const CLIENTID = uuid();
 
@@ -23,36 +23,8 @@ const initialState = {
   title: "",
   description: "",
   momentum: 0,
+  clientId: CLIENTID,
 };
-
-async function CreateEndeavor(state: any, dispatch: any) {
-  const endeavor = {
-    title: "Endeavor 86",
-    description: "",
-    momentum: 1,
-    clientId: CLIENTID,
-  };
-
-  try {
-    const updatedEndeavorsArray = [...state.endeavors, endeavor];
-    dispatch({
-      type: "set",
-      endeavors: updatedEndeavorsArray,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-
-  try {
-    await API.graphql(
-      graphqlOperation(createEndeavor, {
-        input: endeavor,
-      })
-    );
-  } catch (err) {
-    console.log("error creating endeavors...", err);
-  }
-}
 
 function App() {
   const [state, dispatch] = useReducer(EndeavorReducer, initialState);
