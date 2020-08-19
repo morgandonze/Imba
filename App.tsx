@@ -1,6 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useReducer } from "react";
-import { Text, View, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { withAuthenticator } from "aws-amplify-react-native";
 import { API, graphqlOperation } from "aws-amplify";
 import CreateEndeavor from "./src/_graphql/create-endeavor";
@@ -13,9 +19,8 @@ import configureAWS from "./src/configure-aws";
 import uuid from "uuid-v4";
 
 const CLIENTID = uuid();
-
-// CONFIG
 configureAWS();
+const ImbaTitle = "Imba";
 
 const initialState = {
   error: null,
@@ -49,22 +54,26 @@ function App() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={{ marginBottom: 30 }}>
-          <Text style={styles.h1}>Imba</Text>
+          <Text style={styles.h1}>{ImbaTitle}</Text>
+
           {endeavors.map((endvr: any, index: any) => (
             <Endeavor endeavor={endvr} index={index} />
           ))}
         </View>
 
-        <TouchableOpacity
-          onPress={() => CreateEndeavor(state, dispatch)}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Add Endeavor</Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity
+            onPress={() => CreateEndeavor(state, dispatch)}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Add Endeavor</Text>
+          </TouchableOpacity>
+        </View>
+
         <StatusBar style="auto" />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

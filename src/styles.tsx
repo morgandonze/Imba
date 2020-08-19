@@ -3,10 +3,8 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   safeArea: { backgroundColor: "white", flex: 1 },
   container: {
-    flex: 1,
-    alignItems: "stretch",
-    justifyContent: "flex-start",
     paddingHorizontal: 40,
+    paddingVertical: 20,
   },
   h1: {
     color: "#333",
