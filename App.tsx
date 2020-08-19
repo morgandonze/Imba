@@ -7,7 +7,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
-  TextInput,
 } from "react-native";
 import { withAuthenticator } from "aws-amplify-react-native";
 import { API, graphqlOperation } from "aws-amplify";
@@ -79,8 +78,7 @@ function App() {
           <Input
             placeholder="title"
             style={{ ...styles.input }}
-            onChange={(e) => {
-              console.log(e);
+            onChange={(e: any) => {
               EndeavorUpdater(e.target.value, "title", dispatch);
             }}
             value={state.title}
