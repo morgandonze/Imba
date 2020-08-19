@@ -1,4 +1,4 @@
-function reducer(state: any, action: any) {
+function EndeavorReducer(state: any, action: any) {
   switch (action.type) {
     case "set":
       return {
@@ -25,4 +25,12 @@ function reducer(state: any, action: any) {
   }
 }
 
-export default reducer;
+const EndeavorUpdater = (value: any, inputValue: any, dispatch: any) => {
+  dispatch({
+    type: "updateInput",
+    value,
+    inputValue,
+  });
+};
+
+export { EndeavorReducer, EndeavorUpdater };

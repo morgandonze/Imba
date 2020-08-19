@@ -6,7 +6,7 @@ function Endeavor(props: any) {
   const { endeavor, index } = props;
 
   return (
-    <View key={endeavor.id ? endeavor.id : index} style={styles.endeavor}>
+    <View  style={styles.endeavor}>
       <Text style={styles.defaultText}>{endeavor.title}</Text>
     </View>
   );

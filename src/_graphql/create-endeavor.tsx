@@ -3,21 +3,11 @@ import { createEndeavor } from "../graphql/mutations";
 
 async function CreateEndeavor(state: any, dispatch: any) {
   const endeavor = {
-    title: "Endeavor 86",
+    title: state.title,
     description: "",
     momentum: 1,
     clientId: state.clientId,
   };
-
-  try {
-    const updatedEndeavorsArray = [...state.endeavors, endeavor];
-    dispatch({
-      type: "set",
-      endeavors: updatedEndeavorsArray,
-    });
-  } catch (err) {
-    console.log(err);
-  }
 
   try {
     await API.graphql(

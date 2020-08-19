@@ -12,15 +12,18 @@ import { API, graphqlOperation } from "aws-amplify";
 import CreateEndeavor from "./src/_graphql/create-endeavor";
 import { onCreateEndeavor } from "./src/graphql/subscriptions";
 import styles from "./src/styles";
-import EndeavorReducer from "./src/_graphql/endeavor-reducer";
+import {
+  EndeavorReducer,
+  EndeavorUpdater,
+} from "./src/_graphql/endeavor-reducer";
 import getEndeavors from "./src/_graphql/get-endeavors";
 import Endeavor from "./src/components/endeavor";
 import configureAWS from "./src/configure-aws";
 import uuid from "uuid-v4";
 
+const ImbaTitle = "Imba";
 const CLIENTID = uuid();
 configureAWS();
-const ImbaTitle = "Imba";
 
 const initialState = {
   error: null,
@@ -36,10 +39,13 @@ function App() {
   const { endeavors } = state;
 
   useEffect(() => {
-    const api: any = API.graphql(graphqlOperation(onCreateEndeavor));
+    const apiCreateEndeavor: any = API.graphql(
+      graphqlOperation(onCreateEndeavor)
+    );
 
-    const subscriber = api.subscribe({
+    const subscriber = apiCreateEndeavor.subscribe({
       next: (eventData: any) => {
+        console.log(eventData);
         const endeavor = eventData.value.data.onCreateEndeavor;
         if (CLIENTID === endeavor.cliendId) return;
         dispatch({ type: "add", endeavor });
@@ -59,13 +65,26 @@ function App() {
           <Text style={styles.h1}>{ImbaTitle}</Text>
 
           {endeavors.map((endvr: any, index: any) => (
-            <Endeavor endeavor={endvr} index={index} />
+            <Endeavor
+              key={endvr.id ? endvr.id : index}
+              endeavor={endvr}
+              index={index}
+            />
           ))}
         </View>
 
         <View>
+          <input
+            placeholder="title"
+            style={{ ...styles.input }}
+            onChange={(e) => EndeavorUpdater(e.target.value, "title", dispatch)}
+            value={state.title}
+          />
           <TouchableOpacity
-            onPress={() => CreateEndeavor(state, dispatch)}
+            onPress={() => {
+              console.log(state.endeavors);
+              CreateEndeavor(state, dispatch);
+            }}
             style={styles.button}
           >
             <Text style={styles.buttonText}>Add Endeavor</Text>

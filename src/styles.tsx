@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  input: { height: 50, margin: 5, backgroundColor: "#ddd" },
 });
 
 export default styles;
