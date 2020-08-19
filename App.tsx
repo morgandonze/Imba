@@ -1,15 +1,25 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState, useReducer } from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { withAuthenticator } from "aws-amplify-react-native";
 import Amplify, { Auth, PubSub } from "aws-amplify";
 import { AWSIoTProvider } from "@aws-amplify/pubsub/lib/Providers";
 
 import config from "./aws-exports";
 import { API, graphqlOperation } from "aws-amplify";
-import {} from "./src/graphql/mutations";
+import { createEndeavor } from "./src/graphql/mutations";
 import { onCreateEndeavor } from "./src/graphql/subscriptions";
 import { listActivitys, listEndeavors } from "./src/graphql/queries";
+
+const CLIENTID = uuid();
+import uuid from "uuid/v4";
 
 // CONFIG
 Amplify.configure(config);
@@ -84,6 +94,48 @@ const updater = (value, inputValue, dispatch) => {
   });
 };
 
+async function CreateEndeavor(state, dispatch) {
+  const { title, description } = state;
+  const endeavor = {
+    title: "Endeavor 86",
+    description: "",
+    momentum: 1,
+    clientId: CLIENTID,
+  };
+
+  try {
+    console.log(state);
+
+    const updatedEndeavorsArray = [...state.endeavors, endeavor];
+    dispatch({
+      type: "set",
+      endeavors: updatedEndeavorsArray,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
+  try {
+    await API.graphql(
+      graphqlOperation(createEndeavor, {
+        input: endeavor,
+      })
+    );
+  } catch (err) {
+    console.log("error creating endeavors...", err);
+  }
+}
+
+function Endeavor(props) {
+  const { endeavor, index } = props;
+
+  return (
+    <View key={endeavor.id ? endeavor.id : index} style={styles.endeavor}>
+      <Text style={styles.defaultText}>{endeavor.title}</Text>
+    </View>
+  );
+}
+
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { endeavors } = state;
@@ -94,6 +146,7 @@ function App() {
     ).subscribe({
       next: (eventData) => {
         const endeavor = eventData.value.data.onCreateEndeavor;
+        if (CLIENTID === endeavor.cliendId) returrn;
         dispatch({ type: "add", endeavor });
       },
     });
@@ -107,12 +160,19 @@ function App() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.h1}>Imba !!!</Text>
-        {endeavors.map((endvr, index) => (
-          <View key={endvr.id ? endvr.id : index}>
-            <Text style={styles.defaultText}>{endvr.title}</Text>
-          </View>
-        ))}
+        <View style={{ marginBottom: 30 }}>
+          <Text style={styles.h1}>Imba</Text>
+          {endeavors.map((endvr, index) => (
+            <Endeavor endeavor={endvr} index={index} />
+          ))}
+        </View>
+
+        <TouchableOpacity
+          onPress={() => CreateEndeavor(state, dispatch)}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Add Endeavor</Text>
+        </TouchableOpacity>
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
@@ -120,19 +180,43 @@ function App() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { backgroundColor: "#333", flex: 1 },
+  safeArea: { backgroundColor: "white", flex: 1 },
   container: {
     flex: 1,
-    alignItems: "flex-start",
+    alignItems: "stretch",
     justifyContent: "flex-start",
-    padding: 10,
+    paddingHorizontal: 40,
   },
   h1: {
-    color: "#ffab00",
+    color: "#333",
     fontSize: 40,
   },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 24,
+  },
   defaultText: {
-    color: "#ccc",
+    color: "#444",
+    fontWeight: "600",
+  },
+  button: {
+    marginTop: 20,
+    borderRadius: 10,
+    backgroundColor: "#ffab00",
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  endeavor: {
+    height: 50,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginTop: 20,
+    borderRadius: 10,
+    backgroundColor: "#eee",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
