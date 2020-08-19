@@ -1,5 +1,6 @@
 type Endeavor @model {
   id: ID!
+  clientId: ID
   title: String!
   description: String!
   momentum: Float!

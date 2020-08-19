@@ -9,6 +9,7 @@ export const createEndeavor = /* GraphQL */ `
   ) {
     createEndeavor(input: $input, condition: $condition) {
       id
+      clientId
       title
       description
       momentum
@@ -34,6 +35,7 @@ export const updateEndeavor = /* GraphQL */ `
   ) {
     updateEndeavor(input: $input, condition: $condition) {
       id
+      clientId
       title
       description
       momentum
@@ -59,6 +61,7 @@ export const deleteEndeavor = /* GraphQL */ `
   ) {
     deleteEndeavor(input: $input, condition: $condition) {
       id
+      clientId
       title
       description
       momentum
@@ -88,6 +91,7 @@ export const createActivity = /* GraphQL */ `
       endeavorID
       endeavor {
         id
+        clientId
         title
         description
         momentum
@@ -113,6 +117,7 @@ export const updateActivity = /* GraphQL */ `
       endeavorID
       endeavor {
         id
+        clientId
         title
         description
         momentum
@@ -138,6 +143,7 @@ export const deleteActivity = /* GraphQL */ `
       endeavorID
       endeavor {
         id
+        clientId
         title
         description
         momentum

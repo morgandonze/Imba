@@ -4,12 +4,14 @@
 
 export type CreateEndeavorInput = {
   id?: string | null,
+  clientId?: string | null,
   title: string,
   description: string,
   momentum: number,
 };
 
 export type ModelEndeavorConditionInput = {
+  clientId?: ModelIDInput | null,
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
   momentum?: ModelFloatInput | null,
@@ -18,7 +20,7 @@ export type ModelEndeavorConditionInput = {
   not?: ModelEndeavorConditionInput | null,
 };
 
-export type ModelStringInput = {
+export type ModelIDInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -58,6 +60,22 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
 export type ModelFloatInput = {
   ne?: number | null,
   eq?: number | null,
@@ -72,6 +90,7 @@ export type ModelFloatInput = {
 
 export type UpdateEndeavorInput = {
   id: string,
+  clientId?: string | null,
   title?: string | null,
   description?: string | null,
   momentum?: number | null,
@@ -95,22 +114,6 @@ export type ModelActivityConditionInput = {
   not?: ModelActivityConditionInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type UpdateActivityInput = {
   id: string,
   title?: string | null,
@@ -123,6 +126,7 @@ export type DeleteActivityInput = {
 
 export type ModelEndeavorFilterInput = {
   id?: ModelIDInput | null,
+  clientId?: ModelIDInput | null,
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
   momentum?: ModelFloatInput | null,
@@ -149,6 +153,7 @@ export type CreateEndeavorMutation = {
   createEndeavor:  {
     __typename: "Endeavor",
     id: string,
+    clientId: string | null,
     title: string,
     description: string,
     momentum: number,
@@ -178,6 +183,7 @@ export type UpdateEndeavorMutation = {
   updateEndeavor:  {
     __typename: "Endeavor",
     id: string,
+    clientId: string | null,
     title: string,
     description: string,
     momentum: number,
@@ -207,6 +213,7 @@ export type DeleteEndeavorMutation = {
   deleteEndeavor:  {
     __typename: "Endeavor",
     id: string,
+    clientId: string | null,
     title: string,
     description: string,
     momentum: number,
@@ -241,6 +248,7 @@ export type CreateActivityMutation = {
     endeavor:  {
       __typename: "Endeavor",
       id: string,
+      clientId: string | null,
       title: string,
       description: string,
       momentum: number,
@@ -270,6 +278,7 @@ export type UpdateActivityMutation = {
     endeavor:  {
       __typename: "Endeavor",
       id: string,
+      clientId: string | null,
       title: string,
       description: string,
       momentum: number,
@@ -299,6 +308,7 @@ export type DeleteActivityMutation = {
     endeavor:  {
       __typename: "Endeavor",
       id: string,
+      clientId: string | null,
       title: string,
       description: string,
       momentum: number,
@@ -322,6 +332,7 @@ export type GetEndeavorQuery = {
   getEndeavor:  {
     __typename: "Endeavor",
     id: string,
+    clientId: string | null,
     title: string,
     description: string,
     momentum: number,
@@ -354,6 +365,7 @@ export type ListEndeavorsQuery = {
     items:  Array< {
       __typename: "Endeavor",
       id: string,
+      clientId: string | null,
       title: string,
       description: string,
       momentum: number,
@@ -381,6 +393,7 @@ export type GetActivityQuery = {
     endeavor:  {
       __typename: "Endeavor",
       id: string,
+      clientId: string | null,
       title: string,
       description: string,
       momentum: number,
@@ -413,6 +426,7 @@ export type ListActivitysQuery = {
       endeavor:  {
         __typename: "Endeavor",
         id: string,
+        clientId: string | null,
         title: string,
         description: string,
         momentum: number,
@@ -430,6 +444,7 @@ export type OnCreateEndeavorSubscription = {
   onCreateEndeavor:  {
     __typename: "Endeavor",
     id: string,
+    clientId: string | null,
     title: string,
     description: string,
     momentum: number,
@@ -454,6 +469,7 @@ export type OnUpdateEndeavorSubscription = {
   onUpdateEndeavor:  {
     __typename: "Endeavor",
     id: string,
+    clientId: string | null,
     title: string,
     description: string,
     momentum: number,
@@ -478,6 +494,7 @@ export type OnDeleteEndeavorSubscription = {
   onDeleteEndeavor:  {
     __typename: "Endeavor",
     id: string,
+    clientId: string | null,
     title: string,
     description: string,
     momentum: number,
@@ -507,6 +524,7 @@ export type OnCreateActivitySubscription = {
     endeavor:  {
       __typename: "Endeavor",
       id: string,
+      clientId: string | null,
       title: string,
       description: string,
       momentum: number,
@@ -531,6 +549,7 @@ export type OnUpdateActivitySubscription = {
     endeavor:  {
       __typename: "Endeavor",
       id: string,
+      clientId: string | null,
       title: string,
       description: string,
       momentum: number,
@@ -555,6 +574,7 @@ export type OnDeleteActivitySubscription = {
     endeavor:  {
       __typename: "Endeavor",
       id: string,
+      clientId: string | null,
       title: string,
       description: string,
       momentum: number,

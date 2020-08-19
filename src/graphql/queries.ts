@@ -6,6 +6,7 @@ export const getEndeavor = /* GraphQL */ `
   query GetEndeavor($id: ID!) {
     getEndeavor(id: $id) {
       id
+      clientId
       title
       description
       momentum
@@ -33,6 +34,7 @@ export const listEndeavors = /* GraphQL */ `
     listEndeavors(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        clientId
         title
         description
         momentum
@@ -54,6 +56,7 @@ export const getActivity = /* GraphQL */ `
       endeavorID
       endeavor {
         id
+        clientId
         title
         description
         momentum
@@ -81,6 +84,7 @@ export const listActivitys = /* GraphQL */ `
         endeavorID
         endeavor {
           id
+          clientId
           title
           description
           momentum

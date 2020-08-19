@@ -6,6 +6,7 @@ export const onCreateEndeavor = /* GraphQL */ `
   subscription OnCreateEndeavor {
     onCreateEndeavor {
       id
+      clientId
       title
       description
       momentum
@@ -28,6 +29,7 @@ export const onUpdateEndeavor = /* GraphQL */ `
   subscription OnUpdateEndeavor {
     onUpdateEndeavor {
       id
+      clientId
       title
       description
       momentum
@@ -50,6 +52,7 @@ export const onDeleteEndeavor = /* GraphQL */ `
   subscription OnDeleteEndeavor {
     onDeleteEndeavor {
       id
+      clientId
       title
       description
       momentum
@@ -76,6 +79,7 @@ export const onCreateActivity = /* GraphQL */ `
       endeavorID
       endeavor {
         id
+        clientId
         title
         description
         momentum
@@ -98,6 +102,7 @@ export const onUpdateActivity = /* GraphQL */ `
       endeavorID
       endeavor {
         id
+        clientId
         title
         description
         momentum
@@ -120,6 +125,7 @@ export const onDeleteActivity = /* GraphQL */ `
       endeavorID
       endeavor {
         id
+        clientId
         title
         description
         momentum
