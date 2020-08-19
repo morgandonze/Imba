@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useReducer } from "react";
+import { Input } from "react-native-elements";
 import {
   Text,
   View,
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
+  TextInput,
 } from "react-native";
 import { withAuthenticator } from "aws-amplify-react-native";
 import { API, graphqlOperation } from "aws-amplify";
@@ -74,10 +76,13 @@ function App() {
         </View>
 
         <View>
-          <input
+          <Input
             placeholder="title"
             style={{ ...styles.input }}
-            onChange={(e) => EndeavorUpdater(e.target.value, "title", dispatch)}
+            onChange={(e) => {
+              console.log(e);
+              EndeavorUpdater(e.target.value, "title", dispatch);
+            }}
             value={state.title}
           />
           <TouchableOpacity
