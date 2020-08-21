@@ -37,6 +37,7 @@ function EndeavorsScreen(props: any) {
 
     const subscriber = apiCreateEndeavor.subscribe({
       next: (eventData: any) => {
+        console.log(eventData);
         const endeavor = eventData.value.data.onCreateEndeavor;
         if (CLIENTID === endeavor.cliendId) return;
         dispatch({ type: "add", endeavor });
@@ -50,7 +51,7 @@ function EndeavorsScreen(props: any) {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={{ marginBottom: 30 }}>
         <Text style={styles.h1}>{ImbaTitle}</Text>
 
@@ -83,7 +84,7 @@ function EndeavorsScreen(props: any) {
       </View>
 
       <StatusBar style="auto" />
-    </ScrollView>
+    </View>
   );
 }
 
